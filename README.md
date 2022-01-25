@@ -1,2 +1,2 @@
-# Entrega1+Gigy
+# Entrega+Grupo
 Entrega Intermedia + Gigy
