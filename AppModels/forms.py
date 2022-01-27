@@ -1,5 +1,7 @@
-<<<<<<< HEAD
+
 from django.forms import Form, CharField, IntegerField
+
+from clase2022.settings import AUTH_PASSWORD_VALIDATORS
 
 class EquipoFormulario(Form):
     equipo=CharField()
@@ -13,21 +15,3 @@ class JugadorFormulario(Form):
     nombre=CharField()
     apellido= CharField()
     cantidad_goles=IntegerField()
-=======
-from django.forms import Form, CharField, IntegerField
-
-class EquipoForm(Form):
-    equipo = CharField() 
-    copas_ganadas = IntegerField()
-
-class JugadorForm(Form):
-    jugador = CharField()
-    apellido = CharField()
-    cantidad_goles = IntegerField()
-
-class DirectorTecnicoForm(Form):
-    nombre = CharField()
-    apellido = CharField()
-
- 
->>>>>>> 3cbdadb4aa947cb82973f6a68eecd642f1039734
