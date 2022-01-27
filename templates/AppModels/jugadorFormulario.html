@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Jugadores Formulario</title>
 </head>
 <body>
 
-    {% if formulario.errors %}
-     <p style="color: red;">{{ formulario.errors}</p>
+    {% if formulario2.errors %}
+     <p style="color: red;">{{ formulario2.errors}</p>
     {% endif %} 
     <form action="" method="POST">
         {% csrf_token %}
         
         <table>
-            {{ formulario.as_table }}
+            {{ formulario2.as_table }}
         </table>
 
         <input type="submit"  value="Enviar">

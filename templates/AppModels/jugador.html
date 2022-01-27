@@ -1,3 +1,7 @@
 {% extends "AppModels/padre.html" %} {% load static %} {% block contenidoQueCambia %}
 <h3> Los jugadores disponibles son:</h3>
+       {% for jugador in jugadores %}
+           {{ jugador }}
+           <br>
+       {% endfor %}
 {% endblock %}
