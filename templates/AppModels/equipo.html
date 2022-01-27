@@ -1,7 +1,13 @@
 {% extends "AppModels/padre.html" %} {% load static %} {% block contenidoQueCambia %}
-<h3> Los equipos del torneos son:</h3>
+<h3> Los equipos del torneo son:</h3>
     {% for equipo in equipos %}
         {{ equipo }}
         <br>
      {% endfor %}
+
+     <a class="btn btn-primary" href="{% url 'equipos_formulario' %}">Agregar</a>
+{% endblock %}
+
+{% block titulo %}
+    equipos
 {% endblock %}

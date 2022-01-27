@@ -1,0 +1,26 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>copas_ganadas</title>
+ </head>
+ <body>
+
+    Estoy buscando al equipo con {{ copas_ganadas }} copas ganadas.
+     
+    {% if equipo  %}
+
+    <ul>
+        {% for equipo in equipos %}
+            <li>{{  equipo  }}</li>
+            <li>{{  copas_ganadas  }}</li>
+        {%  endfor %}
+    </ul>
+
+    {%  endif  %}
+
+
+ </body>
+ </html>

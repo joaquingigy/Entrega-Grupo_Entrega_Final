@@ -14,7 +14,7 @@ def inicio(request):
 
 def equipo(request):
     return render(request, 'AppModels/equipo.html',
-    {'equipos':Equipo.objects.all()})
+    {'equipo':Equipo.objects.all()})
 
 def jugador(request):
     return render(request, 'AppModels/jugador.html')
@@ -57,3 +57,21 @@ def directores_tecnicos_formulario(request):
     else:
          formulario = DirectorTecnicoForm()  
     return render (request, 'AppModels/directores_tecnicosFormulario.html', {'formulario': formulario})    
+
+def busqueda_copas_ganadas(request):
+    return render(request, 'AppModels/busqueda_copas_ganadas.html')
+
+def buscar(request):
+    copas_ganadas = request.GET.get["copas_ganadas"]
+
+    if copas_ganadas:
+    
+        equipo = Equipo.objects.filter(copas_ganadas=copas_ganadas)
+
+        return render(request, 'AppModels/buscar.html',
+            {'equipo': equipo, 'copas_ganadas': copas_ganadas})
+    else:
+        return HttpResponse('Cantidad de copas ganadas invalida.')
+
+
+
