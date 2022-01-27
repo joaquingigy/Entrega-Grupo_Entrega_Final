@@ -15,7 +15,7 @@ def inicio(request):
 
 def equipo(request):
     return render(request, 'AppModels/equipo.html',
-    {'equipo':Equipo.objects.all()})
+    {'equipos':Equipo.objects.all()})
 
 def jugador(request):
     return render(request, 'AppModels/jugador.html',
@@ -23,7 +23,7 @@ def jugador(request):
 
 def director_tecnico(request):
     return render(request, 'AppModels/director_tecnico.html',
-    {'nombres':DirectorTecnico.objects.all()})
+    {'directores_tecnicos':DirectorTecnico.objects.all()})
 
 def equipos_formulario(request):
     if request.method == 'POST':
