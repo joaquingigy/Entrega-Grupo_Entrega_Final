@@ -1,3 +1,7 @@
 {% extends "AppModels/padre.html" %} {% load static %} {% block contenidoQueCambia %}
 <h3> Lista de Director_Tecnico</h3>
+    {% for director_tecnico in directores_tecnicos %}
+        {{ director_tecnico }}
+        <br>
+    {% endfor %}
 {% endblock %}
