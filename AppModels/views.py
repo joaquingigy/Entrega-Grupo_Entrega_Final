@@ -1,7 +1,12 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+<<<<<<< HEAD
 from AppModels.forms import DirectorTecnicoFormulario, EquipoFormulario, JugadorFormulario
 from AppModels.models import DirectorTecnico, Equipo, Jugadores
+=======
+from AppModels.forms import EquipoForm, JugadorForm, DirectorTecnicoForm
+from AppModels.models import DirectorTecnico, Equipo, Jugador
+>>>>>>> 3cbdadb4aa947cb82973f6a68eecd642f1039734
 
 def crear_equipo(request, nombre, copas_ganadas):
     equipo = Equipo(nombre=nombre, copas_ganadas=copas_ganadas)
@@ -14,7 +19,7 @@ def inicio(request):
 
 def equipo(request):
     return render(request, 'AppModels/equipo.html',
-    {'equipos':Equipo.objects.all()}) 
+    {'equipo':Equipo.objects.all()})
 
 def jugador(request):
     return render(request, 'AppModels/jugador.html',
@@ -26,6 +31,7 @@ def director_tecnico(request):
 
 def equipos_formulario(request):
     if request.method == 'POST':
+<<<<<<< HEAD
         formulario=EquipoFormulario(request.POST)
         
         if formulario.is_valid():

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include 
 
-from AppModels.views import crear_equipo, equipo
+from AppModels.views import crear_equipo, equipo, director_tecnico, jugador
 
 urlpatterns = [
     path('admin/', admin.site.urls),

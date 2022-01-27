@@ -1,7 +1,13 @@
 {% extends "AppModels/padre.html" %} {% load static %} {% block contenidoQueCambia %}
 <h3> Lista de Director_Tecnico</h3>
+<<<<<<< HEAD
     {% for nombre in nombres %}
       {{ nombre }}
      <br>
+=======
+    {% for director_tecnico in directores_tecnicos %}
+        {{ director_tecnico }}
+        <br>
+>>>>>>> 3cbdadb4aa947cb82973f6a68eecd642f1039734
     {% endfor %}
 {% endblock %}

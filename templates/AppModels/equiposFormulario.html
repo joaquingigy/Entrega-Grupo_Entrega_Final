@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +18,26 @@
         <table>
             {{ formulario.as_table }}
         </table>
+=======
+{% extends "AppModels/padre.html" %} 
+
+{% load static %} {% block contenidoQueCambia %}
+
+    {% if formulario.errors %}
+        <p style="color: red;"> {{ formulario.errors}}</p> 
+    {% endif %}
+
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <table>
+            {{ formulario.as_table}}
+        </table>  
+>>>>>>> 3cbdadb4aa947cb82973f6a68eecd642f1039734
 
         <input type="submit"  value="Enviar">
     </form>
-</body>
-</html>
+
+{% endblock %}
+

@@ -1,5 +1,6 @@
-from unicodedata import name
+from unicodedata import name 
 from django.urls import path 
+<<<<<<< HEAD
 from AppModels.views import buscar, busqueda_copas_ganadas, crear_equipo, director_tecnico, equipo, jugador, inicio,equipos_formulario,director_tecnico_formulario, jugador_formulario
 
 urlpatterns = [
