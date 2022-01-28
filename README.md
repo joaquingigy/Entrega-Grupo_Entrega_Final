@@ -33,7 +33,9 @@ para probar la búsqueda de equipo, seguir el siguiente link http://127.0.0.1:80
   2. Si se ingresa una cantidad que no se corresponda con ningún equipo, se mostrará "No se encontraron equipos con esa cantidad de copas"  
 
 
-
+### Admin
+  Usuario: jose1234
+  Clave: coderhouse
 
 
 
