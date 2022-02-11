@@ -1,0 +1,13 @@
+{% extends "blog/padre.html" %} 
+{% load static %} 
+{% block contenidoQueCambia %}
+
+    <h3>Equipo: {{ equipo.nombre }}</h3>
+    <ul class="caracteristicas">
+        <h6>Características:</h6>
+        <li>País: {{ equipo.pais }}</li>
+        <li>Liga: {{ equipo.liga }}</li>
+        <li>Copas ganadas: {{ equipo.copasGanadas }}</li>
+    </ul>
+     
+{% endblock %}

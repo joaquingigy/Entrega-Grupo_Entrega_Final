@@ -21,4 +21,5 @@ from AppModels.views import crear_equipo, equipo, director_tecnico, jugador
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('clase/', include('AppModels.urls')),
+    path('', include('blog.urls')),
 ]
