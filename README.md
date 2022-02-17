@@ -1,3 +1,20 @@
+# Tareas Realizadas:
+José Manuel: creación rama desarrollo, app blog y login
+Falta hacer en el login registro y logout
+En inicio, que el botón no diga iniciar, sino el nombre de usuario (clase de Avatar)
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Entrega Proyecto Final - Grupo Gigi/Robles/Acosta
 
 Entrega Intermedia 

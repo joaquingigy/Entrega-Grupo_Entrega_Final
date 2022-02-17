@@ -1,0 +1,10 @@
+{% extends "blog/padre.html" %} 
+{% load static %} 
+{% block contenidoQueCambia %}
+
+    <h3>{{ blog.titulo }}</h3>
+    <h6>Fecha de publicación: {{ blog.fechaDePublicacion }}</h6>
+    <p>{{ blog.cuerpo }}</p>
+    <p class="autor"><b>Autor:</b> {{ blog.autor }}</p>
+     
+{% endblock %}

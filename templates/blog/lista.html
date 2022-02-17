@@ -1,0 +1,21 @@
+{% extends 'blog/padre.html' %} 
+{% load static %}
+
+    {% comment %} NavBar {% endcomment %}
+
+{% block contenidoQueCambia %}
+    
+    {% block previoLista %}
+        {% comment %} Contenido antes de la lista {% endcomment %}
+    {% endblock previoLista %}
+
+        <ul id="lista">
+            {% for objeto in object_list %}
+            <li><a href="{% url objeto.urlName objeto.pk %}">{{ objeto }}</a></li>
+            {% endfor %}
+        </ul>
+
+
+{% endblock contenidoQueCambia%}
+
+    {% comment %} Footer {% endcomment %}
