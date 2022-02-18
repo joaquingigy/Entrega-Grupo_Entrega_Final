@@ -1,6 +1,6 @@
 from unicodedata import name 
 from django.urls import path 
-from .views import Blogs, Blog, Equipos, Equipo, login_request
+from .views import Blogs, Blog, Equipos, Equipo, login_request, registro
 
 urlpatterns = [
     path('', Blogs.as_view() , name='blogs') ,
@@ -8,4 +8,6 @@ urlpatterns = [
     path('equipos/', Equipos.as_view() , name='equipos') ,
     path('equipo/<pk>', Equipo.as_view() , name='equipo') ,
     path('login/', login_request , name='login') ,
+    path('registro/', registro , name='registro'), 
+    
 ]

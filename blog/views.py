@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from .models import Blog, Equipo
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import login, authenticate
+from .forms import UserRegisterForm
 
 # Create your views here.
 class Blogs(ListView):
@@ -48,3 +49,18 @@ def login_request(request):
     form = AuthenticationForm()
     
     return render(request, 'blog/login.html' , {'form' : form})
+
+def registro (request):
+    if request.method == 'POST' :
+        # form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)    
+        if form.is_valid():
+            username = form.cleaned_data ['username']
+            form.save()
+            return render (request, "blog/login.html", {"mensaje": "Usuario Creado :)"})     
+        
+    else:
+         # form = UserCreationForm()
+        form = UserRegisterForm()
+            
+    return render (request, 'blog/registro.html', {'form':form})
