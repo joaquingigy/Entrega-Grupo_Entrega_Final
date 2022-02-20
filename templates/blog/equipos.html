@@ -1,10 +1,23 @@
 {% extends "blog/lista.html" %} 
 {% load static %} 
 
-    {% block previoLista %}
+{% block previoLista %}
     
-        <h3>Equipos registrados</h3>
+    <h3>Equipos registrados</h3>
 
-    {% endblock previoLista %}
+    {% for equipo in equipos %}
+        {{ equipo }}
+        <a href="{% url 'equipo_delete' equipo.id %}">Borrar</a>
+        <a href="{% url 'equipo_update' equipo.id %}">Editar </a>
+        <br>
+    {% endfor %}
+
+    <a class="btn btn-primary" href="{% url 'equipo_add' %}">Agregar</a>
+
+{% endblock previoLista %}
+
+{% block titulo %}
+    Equipos
+{% endblock %}
 
         {% comment %} lista de equipos {% endcomment %}

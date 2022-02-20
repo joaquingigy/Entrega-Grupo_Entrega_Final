@@ -29,7 +29,7 @@ class Equipo(models.Model):
     liga = models.CharField(max_length=1)
     copasGanadas = models.IntegerField(default=0)
     urlName = 'equipo'
-    def __str__(self):
+    def __str__(self): 
         return self.nombre
     
 class Persona(models.Model):
