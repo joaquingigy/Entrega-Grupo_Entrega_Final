@@ -23,6 +23,7 @@ class EquipoForm(Form):
     liga = CharField(max_length=1)
     copasGanadas = IntegerField(default=0) 
 
+
 class JugadorForm(Form):
     nombre = CharField(max_length=50)
     apellido = CharField(max_length=50)

@@ -27,7 +27,34 @@ class Equipos(ListView):
 class Equipo(DetailView):
     model = Equipo
     template_name = 'blog/equipo.html'
+
+def equipos_formulario(request):
+    if request.method == 'POST':
+        formulario = EquipoForm(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            Equipo.objects.create(nombre=data['equipo'], pais=data['pais'], liga=data['liga'], copasGanadas=data['copas_ganadas'])
+            return redirect('equipos')
+        else:
+            formulario = EquipoForm()
+        return render(request, 'blog/equiposFormulario.html')
+
+def busqueda_equipo(request):
+    return render(request, 'blog/busquedaEquipo.html')
+
+def buscar(request):
+    copasGanadas = request.GET.get("copas_ganadas")
     
+    if copasGanadas:
+        equipo = Equipo.objects.filter(copasGanadas=copasGanadas)
+
+        return render(request, 'blog/buscar.html', 
+            {'equipos': equipo, 'copas_ganadas': copasGanadas})
+    else:
+        return HttpResponse('No se envio un numero de copas ganadas valido.')
+
+
 def login_request(request):
     
     if request.method == "POST":
