@@ -1,6 +1,10 @@
+# from pyexpat import model
 from django.db import models
 
-from AppModels.views import equipo
+# from AppModels.views import equipo
+
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Autor(models.Model):
@@ -50,3 +54,10 @@ class Jugador(Persona):
     
 class DirectorTecnico(Persona):
     aniosExperiencia = models.IntegerField(default=0)
+    
+class Avatar (models.Model):
+    #vinculo con el usuario
+    user = models.ForeignKey(User, on_delete=models.CASCADE) 
+    #Subcarpeta avatares de media
+    imagen = models.ImageField (upload_to = 'avatares', null=True , blank = True)
+    

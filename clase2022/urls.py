@@ -18,8 +18,17 @@ from django.urls import path, include
 
 from AppModels.views import crear_equipo, equipo, director_tecnico, jugador
 
+#Para las imagenes
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('clase/', include('AppModels.urls')),
     path('', include('blog.urls')),
 ]
+
+#Para las imágenes
+urlpatterns+= static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

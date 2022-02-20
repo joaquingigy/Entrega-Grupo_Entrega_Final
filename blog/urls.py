@@ -1,6 +1,9 @@
-from unicodedata import name 
+from unicodedata import name
+from xml.etree.ElementInclude import include
+from django import views 
 from django.urls import path 
-from .views import Blogs, Blog, Equipos, Equipo, login_request, registro
+from .views import Blogs, Blog, Equipos, Equipo, editarPerfil, login_request, registro
+
 
 urlpatterns = [
     path('', Blogs.as_view() , name='blogs') ,
@@ -9,5 +12,8 @@ urlpatterns = [
     path('equipo/<pk>', Equipo.as_view() , name='equipo') ,
     path('login/', login_request , name='login') ,
     path('registro/', registro , name='registro'), 
-    
+    path('editarperfil',editarPerfil , name = "Editar Perfil" ), 
+
 ]
+
+

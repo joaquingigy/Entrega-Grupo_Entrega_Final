@@ -1,0 +1,20 @@
+{% comment %} Aquí va lo cambia, y lo asociado a esta vista {% endcomment %}
+
+<h1> Formulario - Editar Perfil </h1>
+<h1> De {{usuario}} </h1>
+
+<form action= "" method = "Post" > {% csrf_token%}
+    <table>
+
+        {{miformulario.as_table}}
+
+    </table>
+
+
+
+    <input type= "submit", value = "Enviar">
+
+</form>
+
+
+
