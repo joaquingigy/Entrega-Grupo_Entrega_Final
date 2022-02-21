@@ -1,6 +1,6 @@
 import re
 from django.shortcuts import redirect, render
-from platformdirs import user_data_dir
+
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login, authenticate
 from .forms import AvatarFormulario, UserRegisterForm , UsereditForm
@@ -13,10 +13,10 @@ from django.forms import model_to_dict
 from django.http import HttpResponse
 
 # from blog.views import director_tecnico, equipo, equipos_formulario, jugador
-from .models import Blog, DirectorTecnico, Equipo, Jugador, Avatar
+from blog.models import Blog, DirectorTecnico, Equipo, Jugador, Avatar
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-from .forms import UserRegisterForm, EquipoForm, JugadorForm, DirectorTecnicoForm
+from .forms import UserRegisterForm, EquipoForm, JugadorForm, DirectorTecnicoForm,BlogForm
 
 # Create your views here.
 class Blogs(ListView):
@@ -45,6 +45,23 @@ class Equipos(ListView):
 class Equipo(DetailView):
     model = Equipo
     template_name = 'blog/equipo.html'
+    
+class Jugadores(ListView):
+    model = Jugador
+    template_name = 'blog/jugadores.html'
+    
+class Jugador(DetailView):
+    model = Jugador
+    template_name = 'blog/jugador.html'    
+    
+class DirectoresTecnicos (ListView):
+    model = DirectorTecnico
+    template_name = 'blog/directores_tecnicos.html'
+    
+class DirectorTecnico(DetailView):
+    model = DirectorTecnico
+    template_name = 'blog/director_tecnico.html'   
+
 
 def equipos_formulario(request):
     if request.method == 'POST':
@@ -168,17 +185,17 @@ def equipos_formulario(request):
 #         {'equipos': Equipo.objects.all() }
 #         )
 
-def jugador(request):
-    return render(request,
-        'blog/jugador.html',
-        {'jugador': Jugador.objects.all() }
-        )
+# def jugador(request):
+#     return render(request,
+#         'blog/jugador.html',
+#         {'jugador': Jugador.objects.all() }
+#         )
 
-def director_tecnico(request):
-    return render(request,
-        'blog/director_tecnico.html',
-        {'director_tecnico': DirectorTecnico.objects.all() }
-        )
+# def director_tecnico(request):
+#     return render(request,
+#         'blog/director_tecnico.html',
+#         {'director_tecnico': DirectorTecnico.objects.all() }
+#         )
 
 def equipo_add(request):
     if request.method == 'POST':
@@ -186,7 +203,7 @@ def equipo_add(request):
 
         if formulario.is_valid():
             data = formulario.cleaned_data
-            Equipo.object.create(
+            Equipo.objects.create(
                 nombre=data['nombre'],
                 pais=data['pais'],
                 liga=data['liga'],
@@ -210,7 +227,7 @@ def jugador_add(request):
                 equipo=data['equipo'],
                 goles=data['goles'],
                 )
-            return redirect('jugador')
+            return redirect('jugadores')
     else:
         formulario = JugadorForm()
     return render(request, 'blog/equiposFormulario.html', {'formulario': formulario})
@@ -246,7 +263,7 @@ def jugador_delete(request, id_jugador):
     return redirect('jugadores')
 
 def director_tecnico_delete(request, id_director_tecnico):
-    director_tecnico = Jugador.objects.get(id=id_director_tecnico) 
+    director_tecnico = DirectorTecnico.objects.get(id=id_director_tecnico) 
     director_tecnico.delete()
 
     return redirect('director tecnico')
@@ -313,3 +330,47 @@ def director_tecnico_update(request, id_director_tecnico):
     else:
         formulario = DirectorTecnicoForm(model_to_dict(director_tecnico))
     return render(request, 'blog/equiposFormulario.html', {'formulario': formulario})
+
+def blog_add(request):
+    if request.method == 'POST':
+        formulario = BlogForm(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            Blog.objects.create(
+                titulo=data['titulo'],
+                cuerpo=data['cuerpo'],
+                autor=data['autor'],
+            
+                )
+            return redirect('')
+    else:
+        formulario = BlogForm()
+    return render(request, 'blog/equiposFormulario.html', {'formulario': formulario})
+
+def blog_update(request, id_blog):
+    blog = Blog.objects.get(id=id_blog) 
+
+    if request.method == 'POST':
+        formulario = BlogForm(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+          
+            blog.titulo = data['titulo']
+            blog.cuerpo=data['cuerpo']
+            blog.autor=data['autor']
+            
+
+            blog.save()  
+            
+            return redirect('blog')
+    else:
+        formulario = BlogForm(model_to_dict(blog))
+    return render(request, 'blog/equiposFormulario.html', {'formulario': formulario})
+
+def blog_delete(request, id_blog):
+    blog = blog.objects.get(id=id_blog) 
+    blog.delete()
+
+    return redirect('blogs')

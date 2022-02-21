@@ -1,9 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm
 import django.forms as forms
 from django.contrib.auth.models import User
-from django.forms import Form, CharField, IntegerField
+from django.forms import Form, CharField, IntegerField ,DateTimeField,ModelChoiceField
 
-from blog.models import Jugador,Equipo
+from blog.models import Blog, Jugador,Equipo
 
 
 
@@ -60,7 +60,7 @@ class JugadorForm(Form):
     nombre = CharField(max_length=50)
     apellido = CharField(max_length=50)
     copasGanadas = IntegerField()
-    equipo = CharField ()
+    equipo =ModelChoiceField (queryset = Equipo.objects.all()) 
     goles = IntegerField()
 
     class Meta:
@@ -76,9 +76,18 @@ class DirectorTecnicoForm(Form):
     nombre = CharField(max_length=50)
     apellido = CharField(max_length=50)
     copasGanadas = IntegerField(label= 'Copas Ganadas')
-    equipo = CharField(max_length=40)
+    equipo = ModelChoiceField (queryset = Equipo.objects.all()) 
     aniosExperiencia = IntegerField(label= 'Años Experiencia')
         
         
-        
+class BlogForm(Form):
+    titulo= CharField(max_length=50)
+    cuerpo = CharField ()
+    autor = ModelChoiceField (queryset = User.objects.all())
+
+    class Meta:
+        model = Blog
+        fields = [ 'titulo', 'cuerpo', 'autor'] 
+        #Saca los mensajes de ayuda
+        help_texts = {k: "" for k in fields}
         

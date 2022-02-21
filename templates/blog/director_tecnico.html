@@ -1,23 +1,15 @@
-{% extends "blog/lista.html" %} 
+{% extends "blog/padre.html" %} 
 {% load static %} 
+{% block contenidoQueCambia %}
 
-{% block previoLista %}
-    
-    <h3>Directores tecnicos</h3>
-
-    {% for director_tecnico in directores_tecnicos %}
-        {{ director_tecnico }}
-        <a href="{% url 'director_tecnico_delete' director_tecnico.id %}">Borrar</a>
-        <a href="{% url 'director_tecnico_update' director_tecnico.id %}">Editar </a>
-        <br>
-    {% endfor %}
-
-    <a class="btn btn-primary" href="{% url 'director_tecnico_add' %}">Agregar</a>
-
-{% endblock previoLista %}
-
-{% block titulo %}
-    Directores tecnicos
+    <h3>Director Técnico: {{ directortecnico }}</h3>
+    <ul class="caracteristicas">
+        <h6>Características:</h6>
+        <li>Nombre: {{ directortecnico.nombre }}</li>
+        <li>Apellido: {{ directortecnico.apellido }}</li>
+        <li>CopasGanadas: {{ directortecnico.copasGanadas }}</li>
+        <li>Equipo: {{ directortecnico.equipo }}</li>
+        <li>Años Experiencia: {{ directortecnico.aniosExperiencia }}</li>
+    </ul>
+     
 {% endblock %}
-
-        {% comment %} lista de equipos {% endcomment %}

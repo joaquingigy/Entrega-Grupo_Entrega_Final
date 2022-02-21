@@ -7,34 +7,41 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class Autor(models.Model):
-    nombreDeUsuario = models.CharField(max_length=30)
-    clave = models.CharField(max_length=30)
-    avatar = models.URLField()
-    def __str__(self):
-        return self.nombreDeUsuario
+# class Autor(models.Model):
+#     nombreDeUsuario = models.CharField(max_length=30)
+#     clave = models.CharField(max_length=30)
+#     avatar = models.URLField()
+#     def __str__(self):
+#         return self.nombreDeUsuario
 
 class Blog(models.Model):
     titulo = models.CharField(max_length=50)
     cuerpo = models.TextField()
     autor = models.ForeignKey(
-        Autor ,
+        User ,
         on_delete = models.RESTRICT ,
     )
     fechaDePublicacion = models.DateTimeField(auto_now=True)
-    urlName = 'blog'
+    urlNombre = 'blog'
+    urlUpdate = "blog"
+    urlDelete = "blog"
     def __str__(self):
         return self.titulo
-    
+   # objects = models.Manager()
+   
     
 class Equipo(models.Model):
     nombre = models.CharField(max_length=50)
     pais = models.CharField(max_length=30)
     liga = models.CharField(max_length=1)
     copasGanadas = models.IntegerField(default=0)
-    urlName = 'equipo'
+    urlNombre = 'equipo'
+    urlUpdate = "equipo_update"
+    urlDelete = "equipo_delete"
     def __str__(self): 
         return self.nombre
+    objects = models.Manager()
+    
     
 class Persona(models.Model):
     nombre = models.CharField(max_length=50)
@@ -47,14 +54,18 @@ class Persona(models.Model):
     )
     def __str__(self):
         return f'{self.nombre} {self.apellido}'
+    objects = models.Manager()
     
 class Jugador(Persona):
     goles = models.IntegerField(default=0)
-    
-    
+    urlNombre = 'jugador'
+    urlUpdate = "jugador_update"
+    urlDelete = "jugador_delete"
 class DirectorTecnico(Persona):
     aniosExperiencia = models.IntegerField(default=0)
-    
+    urlNombre = 'director_tecnico'
+    urlUpdate = "director_tecnico_update"
+    urlDelete = "director_tecnico_delete"
 class Avatar (models.Model):
     #vinculo con el usuario
     user = models.ForeignKey(User, on_delete=models.CASCADE) 

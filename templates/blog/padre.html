@@ -25,7 +25,7 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'blogs' %}">Inicio</a>
-                <a class="navbar-brand" href="{% url 'director_tecnico' %}">Director Tecnico</a>
+                <a class="navbar-brand" href="{% url 'directores_tecnicos' %}">Director Tecnico</a>
                 <a class="navbar-brand" href="{% url 'equipos' %}">Equipo</a>
                 <a class="navbar-brand" href="{% url 'jugadores' %}">Jugador</a>
                 {% if not request.user.is_authenticated %} 

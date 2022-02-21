@@ -11,7 +11,10 @@
 
         <ul id="lista">
             {% for objeto in object_list %}
-            <li><a href="{% url objeto.urlName objeto.pk %}">{{ objeto }}</a></li>
+            <li><a href="{% url objeto.urlNombre objeto.pk %}">{{ objeto }}</a> - 
+                <a href="{% url objeto.urlDelete objeto.pk %}">Borrar</a> - 
+                <a href="{% url objeto.urlUpdate objeto.pk %}">Editar</a>
+                <br> </li>
             {% endfor %}
         </ul>
 
