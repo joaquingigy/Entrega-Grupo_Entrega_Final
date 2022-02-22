@@ -34,7 +34,7 @@ class Blogs(ListView):
     #     self.url = avatares.imagen.url
         
     
-class Blog(DetailView):
+class BlogView(DetailView):
     model = Blog
     template_name = 'blog/blog.html'
     
@@ -42,7 +42,7 @@ class Equipos(ListView):
     model = Equipo
     template_name = 'blog/equipos.html'
     
-class Equipo(DetailView):
+class EquipoView(DetailView):
     model = Equipo
     template_name = 'blog/equipo.html'
     
@@ -50,7 +50,7 @@ class Jugadores(ListView):
     model = Jugador
     template_name = 'blog/jugadores.html'
     
-class Jugador(DetailView):
+class JugadorView(DetailView):
     model = Jugador
     template_name = 'blog/jugador.html'    
     
@@ -58,7 +58,7 @@ class DirectoresTecnicos (ListView):
     model = DirectorTecnico
     template_name = 'blog/directores_tecnicos.html'
     
-class DirectorTecnico(DetailView):
+class DirectorTecnicoView (DetailView):
     model = DirectorTecnico
     template_name = 'blog/director_tecnico.html'   
 
@@ -69,7 +69,7 @@ def equipos_formulario(request):
 
         if formulario.is_valid():
             data = formulario.cleaned_data
-            Equipo.objects.create(nombre=data['equipo'], pais=data['pais'], liga=data['liga'], copasGanadas=data['copas_ganadas'])
+            Equipo.objects.create(nombre=data['equipo'], pais=data['pais'], liga=data['liga'], copasGanadas=data['copasGanadas'])
             return redirect('equipos')
         else:
             formulario = EquipoForm()
@@ -79,13 +79,13 @@ def busqueda_equipo(request):
     return render(request, 'blog/busquedaEquipo.html')
 
 def buscar(request):
-    copasGanadas = request.GET.get("copas_ganadas")
+    copasGanadas = request.GET.get("copasGanadas")
     
     if copasGanadas:
         equipo = Equipo.objects.filter(copasGanadas=copasGanadas)
 
         return render(request, 'blog/buscar.html', 
-            {'equipos': equipo, 'copas_ganadas': copasGanadas})
+            {'equipos': equipo, 'copasGanadas': copasGanadas})
     else:
         return HttpResponse('No se envio un numero de copas ganadas valido.')
 
@@ -207,7 +207,7 @@ def equipo_add(request):
                 nombre=data['nombre'],
                 pais=data['pais'],
                 liga=data['liga'],
-                copasGanadas=data['copas_ganadas']
+                copasGanadas=data['copasGanadas']
                 )
             return redirect('equipos')
     else:
@@ -241,11 +241,11 @@ def director_tecnico_add(request):
             DirectorTecnico.objects.create(
                 nombre=data['nombre'],
                 apellido=data['apellido'],
-                copasGanadas=data['copas_ganadas'],
+                copasGanadas=data['copasGanadas'],
                 equipo=data['equipo'],
-                aniosExperiencia=data['anios_experiencia'],
+                aniosExperiencia=data['aniosExperiencia'],
                 )
-            return redirect('director_tecnico')
+            return redirect('directores_tecnicos')
     else:
         formulario = DirectorTecnicoForm()
     return render(request, 'blog/equiposFormulario.html', {'formulario': formulario})
@@ -266,7 +266,7 @@ def director_tecnico_delete(request, id_director_tecnico):
     director_tecnico = DirectorTecnico.objects.get(id=id_director_tecnico) 
     director_tecnico.delete()
 
-    return redirect('director tecnico')
+    return redirect('directores_tecnicos')
 
 def equipo_update(request, id_equipo):
     equipo = Equipo.objects.get(id=id_equipo) 
@@ -280,7 +280,7 @@ def equipo_update(request, id_equipo):
             equipo.nombre = data['nombre']
             equipo.pais=data['pais']
             equipo.liga=data['liga']
-            equipo.copasGanadas=data['copas_ganadas']
+            equipo.copasGanadas=data['copasGanadas']
 
             equipo.save()  
             
@@ -299,13 +299,13 @@ def jugador_update(request, id_jugador):
             data = formulario.cleaned_data
           
             jugador.nombre = data['nombre']
-            jugador.pais=data['pais']
-            jugador.liga=data['liga']
-            jugador.copasGanadas=data['copas_ganadas']
-
+            jugador.apellido=data['apellido']
+            jugador.equipo=data['equipo']
+            jugador.copasGanadas=data['copasGanadas']
+            jugador.goles=data['goles']
             jugador.save()  
             
-            return redirect('jugador')
+            return redirect('jugadores')
     else:
         formulario = JugadorForm(model_to_dict(jugador))
     return render(request, 'blog/equiposFormulario.html', {'formulario': formulario})
@@ -320,13 +320,13 @@ def director_tecnico_update(request, id_director_tecnico):
             data = formulario.cleaned_data
           
             director_tecnico.nombre = data['nombre']
-            director_tecnico.pais=data['pais']
-            director_tecnico.liga=data['liga']
-            director_tecnico.copasGanadas=data['copas_ganadas']
-
+            director_tecnico.apellido=data['apellido']
+            director_tecnico.equipo=data['equipo']
+            director_tecnico.copasGanadas=data['copasGanadas']
+            director_tecnico.aniosExperiencia=data ['aniosExperiencia']
             director_tecnico.save()  
             
-            return redirect('director_tecnico')
+            return redirect('directores_tecnicos')
     else:
         formulario = DirectorTecnicoForm(model_to_dict(director_tecnico))
     return render(request, 'blog/equiposFormulario.html', {'formulario': formulario})
@@ -343,7 +343,7 @@ def blog_add(request):
                 autor=data['autor'],
             
                 )
-            return redirect('')
+            return redirect('blogs')
     else:
         formulario = BlogForm()
     return render(request, 'blog/equiposFormulario.html', {'formulario': formulario})
@@ -364,13 +364,13 @@ def blog_update(request, id_blog):
 
             blog.save()  
             
-            return redirect('blog')
+            return redirect('blogs')
     else:
         formulario = BlogForm(model_to_dict(blog))
     return render(request, 'blog/equiposFormulario.html', {'formulario': formulario})
 
 def blog_delete(request, id_blog):
-    blog = blog.objects.get(id=id_blog) 
+    blog = Blog.objects.get(id=id_blog) 
     blog.delete()
 
     return redirect('blogs')

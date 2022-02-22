@@ -3,15 +3,13 @@ from xml.etree.ElementInclude import include
 from django import views 
 from django.urls import path 
 
-from .views import Blogs, Blog, Equipos, Equipo, buscar, busqueda_equipo, equipos_formulario, director_tecnico_add, director_tecnico_delete, director_tecnico_update, DirectorTecnico, jugador_update, jugador_delete, jugador_add, Jugador, equipo_add, equipo_delete, equipo_update, login_request, registro, editarPerfil,blog_add,DirectoresTecnicos,Jugadores
+from .views import Blogs, BlogView, Equipos, EquipoView, buscar, busqueda_equipo, equipos_formulario, director_tecnico_add, director_tecnico_delete, director_tecnico_update, DirectorTecnicoView, jugador_update, jugador_delete, jugador_add, JugadorView, equipo_add, equipo_delete, equipo_update, login_request, registro, editarPerfil,blog_add,DirectoresTecnicos,Jugadores,blog_update,blog_delete
 
 
 urlpatterns = [
     path('', Blogs.as_view() , name='blogs') ,
     path('blog/add', blog_add , name='blog_add'),
-    path('blog/<pk>', Blog.as_view() , name="blog") ,
     path('equipos/', Equipos.as_view() , name='equipos') ,
-    path('equipo/<pk>', Equipo.as_view() , name='equipo') ,
     path('equiposFormulario', equipos_formulario, name='equipos_formulario'),
     path('busquedaEquipo', busqueda_equipo, name='busqueda_equipo'),
     path('buscar', buscar, name='buscar'),
@@ -30,10 +28,13 @@ urlpatterns = [
     path('directores_tecnicos', DirectoresTecnicos.as_view(), name='directores_tecnicos'),
     path('director_tecnico/add', director_tecnico_add, name='director_tecnico_add'),
     path('director_tecnico/delete/<id_director_tecnico>', director_tecnico_delete, name='director_tecnico_delete'),
-    path('director_tecnico/update/', director_tecnico_update, name='director_tecnico_update'),
-    path('director_tecnico/<pk>', DirectorTecnico.as_view(), name='director_tecnico'),
-    path('jugador/<pk>', Jugador.as_view(), name='jugador'),
-    
+    path('director_tecnico/update/<id_director_tecnico>', director_tecnico_update, name='director_tecnico_update'),
+    path('blog/update/<id_blog>', blog_update, name='blog_update'),
+    path('blog/delete/<id_blog>', blog_delete, name='blog_delete'),
+    path('blog/<pk>', BlogView.as_view() , name="blog") ,
+    path('equipo/<pk>', EquipoView.as_view() , name='equipo') ,
+    path('director_tecnico/<pk>', DirectorTecnicoView.as_view(), name='director_tecnico'),
+    path('jugador/<pk>', JugadorView.as_view(), name='jugador'),
 ]
 
 

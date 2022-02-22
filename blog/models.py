@@ -23,11 +23,11 @@ class Blog(models.Model):
     )
     fechaDePublicacion = models.DateTimeField(auto_now=True)
     urlNombre = 'blog'
-    urlUpdate = "blog"
-    urlDelete = "blog"
+    urlUpdate = "blog_update"
+    urlDelete = "blog_delete"
     def __str__(self):
         return self.titulo
-   # objects = models.Manager()
+   
    
     
 class Equipo(models.Model):
@@ -40,7 +40,7 @@ class Equipo(models.Model):
     urlDelete = "equipo_delete"
     def __str__(self): 
         return self.nombre
-    objects = models.Manager()
+    
     
     
 class Persona(models.Model):
@@ -54,7 +54,7 @@ class Persona(models.Model):
     )
     def __str__(self):
         return f'{self.nombre} {self.apellido}'
-    objects = models.Manager()
+  
     
 class Jugador(Persona):
     goles = models.IntegerField(default=0)
