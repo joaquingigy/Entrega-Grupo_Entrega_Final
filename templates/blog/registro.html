@@ -1,9 +1,20 @@
+{% extends "blog/padre.html" %} 
+{% load static %} 
+{% block contenidoQueCambia %}
+
 <form id="signup" action="" method="POST">
 
     {% csrf_token %}
 
-    {{ form.as_p }}
+    
+    <table>
+        {{ form.as_table }}
+    </table>
+
 
     <button type="submit"> Registro </button>
 
+
+
 </form>
+{% endblock %}

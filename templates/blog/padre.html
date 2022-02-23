@@ -41,6 +41,8 @@
                     
                     <menu id="usuario" class="text-muted small mb-4 mb-lg-0">
                         <li>Hola, {{user.username}}!!!
+                            {% comment %} <a href="{% url 'perfil' request.user.id %}"> {{user.username}}!!! </a> {% endcomment %}
+                           
                             <ul>
                                 <li><a href="">Editar perfil</a></li>
                                 <li><a href="{% url 'logout' %}">Salir</a></li>

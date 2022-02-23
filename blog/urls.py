@@ -1,9 +1,10 @@
+import profile
 from unicodedata import name
 from xml.etree.ElementInclude import include
 from django import views 
 from django.urls import path 
 
-from .views import Blogs, BlogView, Equipos, EquipoView, agregar_avatar, buscar, busqueda_equipo, equipos_formulario, director_tecnico_add, director_tecnico_delete, director_tecnico_update, DirectorTecnicoView, jugador_update, jugador_delete, jugador_add, JugadorView, equipo_add, equipo_delete, equipo_update, login_request, registro, editarPerfil,blog_add,DirectoresTecnicos,Jugadores,blog_update,blog_delete
+from .views import Blogs, BlogView, Equipos, EquipoView, agregar_avatar, buscar, busqueda_equipo, equipos_formulario, director_tecnico_add, director_tecnico_delete, director_tecnico_update, DirectorTecnicoView, jugador_update, jugador_delete, jugador_add, JugadorView, equipo_add, equipo_delete, equipo_update, login_request, registro, editarPerfil,blog_add,DirectoresTecnicos,Jugadores,blog_update,blog_delete,UserView
 
 from django.contrib.auth.views import LogoutView
 
@@ -39,6 +40,7 @@ urlpatterns = [
     path('jugador/<pk>', JugadorView.as_view(), name='jugador'),
     path('agregarAvatar', agregar_avatar, name ="AgregarAvatar"),
     path('logout',LogoutView.as_view (template_name = 'blog/logout.html'), name = 'logout'),
+    path('account/profile/<id_user>',UserView.as_view() , name = 'perfil' ),
 ]
 
 

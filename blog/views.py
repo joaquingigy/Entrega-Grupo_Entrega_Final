@@ -18,14 +18,15 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 from .forms import UserRegisterForm, EquipoForm, JugadorForm, DirectorTecnicoForm,BlogForm
 
+from django.contrib.auth.models import User
 # Create your views here.
 class Blogs(ListView):
      
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)     
-        if self.request.user.id:
     
-            avatares=Avatar.objects.filter(user = self.request.user.id)
+        avatares=Avatar.objects.filter(user = self.request.user.id)
+        if avatares.__len__():        
             context["url"] = avatares[0].imagen.url 
         return context
     
@@ -106,16 +107,19 @@ def login_request(request):
                 return render(request, 'blog/inicio.html', {'mensaje' : f'Bienvenido {usuario}'})
             
             else:
-                
-                return render(request, 'blog/inicio.html', {'mensaje' : 'Los datos ingresados no corresponden a ningún usuario'})
+                #request.method = "GET" 
+                return render(request, 'blog/login.html', {'mensaje' : 'Los datos ingresados no corresponden a ningún usuario'})
             
         else:
             
-            return render(request, 'blog/inicio.html', {'mensaje' : 'Los datos ingresados no son válidos'})
+            #request.method = "GET"
+            return render(request, 'blog/login.html', {'mensaje' : 'Los datos ingresados no son válidos'})
 
     form = AuthenticationForm()
     
     return render(request, 'blog/login.html' , {'form' : form})
+
+
 
 def registro (request):
     if request.method == 'POST' :
@@ -124,7 +128,7 @@ def registro (request):
         if form.is_valid():
             username = form.cleaned_data ['username']
             form.save()
-            return render (request, "blog/login.html", {"mensaje": "Usuario Creado :)"})     
+            return render (request, "blog/inicio.html", {"mensaje": "Usuario Creado :)"})     
         
     else:
          # form = UserCreationForm()
@@ -377,3 +381,6 @@ def blog_delete(request, id_blog):
 
     return redirect('blogs')
 
+class UserView (DetailView):
+    model = User
+    template_name = 'blog/perfil.html'

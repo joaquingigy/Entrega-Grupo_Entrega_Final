@@ -1,0 +1,11 @@
+{% extends "blog/padre.html" %} 
+{% load static %} 
+{% block contenidoQueCambia %}
+
+<img src={{url}}>
+<h3>{{ user.username }}</h3>
+<h5 class ='text-muted'>{{ user.first_name  }} {{user.last_name}} </h5>
+<p> email: {{ user.email}}</p>
+
+
+{% endblock %}
