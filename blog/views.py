@@ -20,19 +20,18 @@ from .forms import UserRegisterForm, EquipoForm, JugadorForm, DirectorTecnicoFor
 
 # Create your views here.
 class Blogs(ListView):
-    # def __init__ (self):
-    #     user = self.request.user.id
-    #     avatares=Avatar.objects.filter(user)
-    #     url = avatares [0].imagen.url
-        
+     
+    def get_context_data(self, **kwargs) :
+        context = super().get_context_data(**kwargs)     
+        if self.request.user.id:
+    
+            avatares=Avatar.objects.filter(user = self.request.user.id)
+            context["url"] = avatares[0].imagen.url 
+        return context
+    
     model = Blog
     template_name = 'blog/inicio.html'
     
-    # def get(self,request):
-    #     user = self.request.user.id
-    #     avatares=Avatar.objects.filter(user)
-    #     self.url = avatares.imagen.url
-        
     
 class BlogView(DetailView):
     model = Blog
@@ -162,16 +161,16 @@ def editarPerfil(request):
 @login_required
 def agregar_avatar (request):
     if request.method == 'POST':
-        formulario = AvatarFormulario (request.Post , request. Files)
+        miFormulario = AvatarFormulario (request.POST , request.FILES)
         
-        if formulario.is_valid():
-            avatar = Avatar (user = request.user , imagen = formulario.cleaned_data ['imagen'] )    
-            avatar.save
+        if miFormulario.is_valid():
+            avatar = Avatar (user = request.user , imagen = miFormulario.cleaned_data ['imagen'] )    
+            avatar.save ()
             return redirect ('inicio')
     else:
-        formulario = AvatarFormulario ()
+        miFormulario = AvatarFormulario ()
     
-    return render (request,'blog/crear_avatar.html' , {'form': formulario} )
+    return render (request,'blog/crear_avatar.html' , {'miFormulario': miFormulario} )
 
    
 def equipos_formulario(request):
@@ -339,8 +338,10 @@ def blog_add(request):
             data = formulario.cleaned_data
             Blog.objects.create(
                 titulo=data['titulo'],
+                subtitulo = data['subtitulo'],
                 cuerpo=data['cuerpo'],
                 autor=data['autor'],
+                imagen= data['imagen'],
             
                 )
             return redirect('blogs')
@@ -358,9 +359,10 @@ def blog_update(request, id_blog):
             data = formulario.cleaned_data
           
             blog.titulo = data['titulo']
+            blog.subtitulo = data['subtitulo']
             blog.cuerpo=data['cuerpo']
             blog.autor=data['autor']
-            
+            blog.imagen= data['imagen']
 
             blog.save()  
             
@@ -374,3 +376,4 @@ def blog_delete(request, id_blog):
     blog.delete()
 
     return redirect('blogs')
+

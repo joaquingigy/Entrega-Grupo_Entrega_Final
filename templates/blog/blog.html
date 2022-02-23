@@ -2,9 +2,11 @@
 {% load static %} 
 {% block contenidoQueCambia %}
 
+    <img src={{blog.imagen}}>
     <h3>{{ blog.titulo }}</h3>
+    <h5 class ='text-muted'>{{ blog.subtitulo }}</h5>
     <h6>Fecha de publicación: {{ blog.fechaDePublicacion }}</h6>
     <p>{{ blog.cuerpo }}</p>
     <p class="autor"><b>Autor:</b> {{ blog.autor }}</p>
-     
+    
 {% endblock %}

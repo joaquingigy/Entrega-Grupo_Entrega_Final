@@ -1,9 +1,10 @@
+from calendar import c
 from django.contrib.auth.forms import UserCreationForm
 import django.forms as forms
 from django.contrib.auth.models import User
-from django.forms import Form, CharField, IntegerField ,DateTimeField,ModelChoiceField
+from django.forms import Form, CharField, ImageField, IntegerField ,DateTimeField,ModelChoiceField
 
-from blog.models import Blog, Jugador,Equipo
+from blog.models import Avatar, Blog, Jugador,Equipo
 
 
 
@@ -41,8 +42,8 @@ class UsereditForm (UserCreationForm):
         #Saca los mensajes de ayuda
         help_texts = {k: "" for k in fields}
             
-class AvatarFormulario(forms.Form):
-    imagen = forms.ImageField (required = True) 
+# class AvatarFormulario(forms.Form):
+#     imagen = forms.ImageField (required = True) 
 
 class EquipoForm(Form):
     nombre = CharField(max_length=40)
@@ -82,12 +83,20 @@ class DirectorTecnicoForm(Form):
         
 class BlogForm(Form):
     titulo= CharField(max_length=50)
+    subtitulo= CharField(max_length=50)
     cuerpo = CharField ()
     autor = ModelChoiceField (queryset = User.objects.all())
-
+    imagen = CharField ()
     class Meta:
         model = Blog
-        fields = [ 'titulo', 'cuerpo', 'autor'] 
+        fields = [ 'titulo','subtitulo', 'cuerpo', 'autor','imagen'] 
         #Saca los mensajes de ayuda
         help_texts = {k: "" for k in fields}
         
+class AvatarFormulario (Form):
+    imagen = ImageField (required = True)
+    class Meta:
+        model = Avatar
+        fields = ['imagen'] 
+        #Saca los mensajes de ayuda
+        help_texts = {k: "" for k in fields}        

@@ -16,6 +16,7 @@ from django.contrib.auth.models import User
 
 class Blog(models.Model):
     titulo = models.CharField(max_length=50)
+    subtitulo= models.CharField(max_length=50)
     cuerpo = models.TextField()
     autor = models.ForeignKey(
         User ,
@@ -25,6 +26,7 @@ class Blog(models.Model):
     urlNombre = 'blog'
     urlUpdate = "blog_update"
     urlDelete = "blog_delete"
+    imagen = models.URLField()
     def __str__(self):
         return self.titulo
    
@@ -66,6 +68,7 @@ class DirectorTecnico(Persona):
     urlNombre = 'director_tecnico'
     urlUpdate = "director_tecnico_update"
     urlDelete = "director_tecnico_delete"
+
 class Avatar (models.Model):
     #vinculo con el usuario
     user = models.ForeignKey(User, on_delete=models.CASCADE) 

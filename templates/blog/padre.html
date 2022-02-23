@@ -17,7 +17,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{%static 'AppModels/css/styles.css' %}" rel="stylesheet" />
-
+        <link rel="stylesheet" href="{% static 'AppModels/css/usuario.css' %}">
 
     </head>
     <body>
@@ -28,26 +28,43 @@
                 <a class="navbar-brand" href="{% url 'directores_tecnicos' %}">Director Tecnico</a>
                 <a class="navbar-brand" href="{% url 'equipos' %}">Equipo</a>
                 <a class="navbar-brand" href="{% url 'jugadores' %}">Jugador</a>
-                {% if not request.user.is_authenticated %} 
-                <a class="btn btn-primary" href="{% url 'login' %}">INICIAR</a>
-                {% endif %}  
                 
-                {% if request.user.is_authenticated %}
-                <img src= "{{url}}" height= "40px" />
-                <p class="text-muted small mb-4 mb-lg-0"> Hola, {{user.username}}!!! </p>
-                {% endif %}
+                <div style = "display:contents;position:relative" > 
 
+                    {% if not request.user.is_authenticated %} 
+                    <a class="btn btn-primary" href="{% url 'login' %}">INICIAR</a>
+                    {% endif %}  
+                    
+                    {% if request.user.is_authenticated %}
+                    <img src= "{{url}}" height= "40px" class = "rounded" /> 
+                    <!-- <p class="text-muted small mb-4 mb-lg-0 "> Hola, {{user.username}}!!! </p> -->
+                    
+                    <menu id="usuario" class="text-muted small mb-4 mb-lg-0">
+                        <li>Hola, {{user.username}}!!!
+                            <ul>
+                                <li><a href="">Editar perfil</a></li>
+                                <li><a href="{% url 'logout' %}">Salir</a></li>
+                            </ul>
+                        </li>
+                    </menu>   
 
+                    {% endif %}
+
+                </div>
+                 
             </div>
         </nav>
 
 
         <!-- Esto es lo que va a cambiar-->
+        <div class="container" >
 
         {% block contenidoQueCambia %}
 
         {% endblock %}
-     
+        
+    </div>
+
         <!-- Footer-->
         <footer class="footer bg-light">
             <div class="container">
