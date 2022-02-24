@@ -129,7 +129,7 @@ def registro (request):
         if form.is_valid():
             username = form.cleaned_data ['username']
             form.save()
-            return redirect ('blogs')  #(request, "blog/inicio.html", {"mensaje": "Usuario Creado :)"})     
+            return redirect ('login')  #(request, "blog/inicio.html", {"mensaje": "Usuario Creado :)"})     
         
     else:
          # form = UserCreationForm()
@@ -403,9 +403,12 @@ def user_view (request):
         avatares=Avatar.objects.filter(user = request.user.id)
         if avatares.__len__():        
             url = avatares[0].imagen.url 
-        # else:
-        #     url = ""
+        else:
+            url = ""
         return render (request,'blog/perfil.html',{'url': url})
 
 def about_view (request):
     return render (request,"blog/about.html")
+
+def error404_view (request):
+    return render (request,"blog/error404.html")

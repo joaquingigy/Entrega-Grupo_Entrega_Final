@@ -2,8 +2,6 @@
 {% load static %} 
 {% block contenidoQueCambia %}
   
-<link rel="stylesheet" href="{% static 'AppModels/css/usuario.css' %}">
-
     {%if user.is_authenticated%}
     <img width="400" src={{url}} class = "avatar-perfil" >
     <h3>{{ user.username }}</h3>

@@ -6,7 +6,7 @@ from django import views
 from django.shortcuts import render 
 from django.urls import path 
 
-from .views import Blogs, BlogView, Equipos, EquipoView, about_view, agregar_avatar, buscar, busqueda_equipo, equipos_formulario, director_tecnico_add, director_tecnico_delete, director_tecnico_update, DirectorTecnicoView, jugador_update, jugador_delete, jugador_add, JugadorView, equipo_add, equipo_delete, equipo_update, login_request, registro, editarPerfil,blog_add,DirectoresTecnicos,Jugadores,blog_update,blog_delete, user_view
+from .views import Blogs, BlogView, Equipos, EquipoView, about_view, agregar_avatar, buscar, busqueda_equipo, equipos_formulario, director_tecnico_add, director_tecnico_delete, director_tecnico_update, DirectorTecnicoView, error404_view, jugador_update, jugador_delete, jugador_add, JugadorView, equipo_add, equipo_delete, equipo_update, login_request, registro, editarPerfil,blog_add,DirectoresTecnicos,Jugadores,blog_update,blog_delete, user_view
 
 from django.contrib.auth.views import LogoutView
 
@@ -44,6 +44,7 @@ urlpatterns = [
     path('logout',LogoutView.as_view (template_name = 'blog/logout.html'), name = 'logout'),
     path('account/profile',user_view  , name = 'perfil' ),
     path('about/',about_view, name = 'about' ),
+    path('**',error404_view, name= 'error404'),
 ]
 
 
