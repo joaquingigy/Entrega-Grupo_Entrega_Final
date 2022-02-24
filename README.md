@@ -1,21 +1,78 @@
-# Tareas Realizadas:
-José Manuel: creación rama desarrollo, app blog y login
-Falta hacer en el login registro y logout
-En inicio, que el botón no diga iniciar, sino el nombre de usuario (clase de Avatar)
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Entrega Proyecto Final - Grupo Gigi/Robles/Acosta
+
+
+#### Participantes: 
+* Joaquin Gigi
+* Jordy Acosta
+* José Robles 
+
+
+
+
+# Tareas Realizadas:
+José Manuel Robles: creación rama desarrollo, app blog , Login y Registro, visualización de Avatar, editar perfil.
+Al momento de ingresar a la app, la ruta base sea "/" , Página "sobre nosotros", Convertir "Hola.username" en link a perfil,página de blog/model blog
+
+Joaquin Gigy: Proceso de CRUD: Create Page, Update Page, Delete Page (Director Técnico, equipo, jugador,) página de perfil, sign up, admin
+
+Jordy Acosta: Proceso de CRUD: Read Page, Registro de Perfil, Página de about,log out, grabación de video de pruebas
+
+## Inicio
+Ingresar a la página de inicio con la siguiente url: http://127.0.0.1:8000/
+
+### Blogs
+* Listado: Botón de "Inicio" en la barra de navegación que redirecciona a http://127.0.0.1:8000/ y permite:
+    * Ver información del elemento al clickearlo y redirecciona a http://127.0.0.1:8000/blog/<id>
+    * Agregar http://127.0.0.1:8000/blog/add
+    * Editar  http://127.0.0.1:8000/blog/update/<id>
+    * Editar
+    * Borrar
+
+
+### Directores Técnicos
+* Listado: Botón de "Director Tecnico" en la barra de navegación que redirecciona a http://127.0.0.1:8000/directores_tecnicos y permite:
+    * Ver información del elemento al clickearlo y redirecciona a http://127.0.0.1:8000/director_tecnico/<id>
+    * Agregar http://127.0.0.1:8000/director_tecnico/add
+    * Editar  http://127.0.0.1:8000/director_tecnico/update/<id>
+    * Borrar  
+
+### Equipos
+* Listado: Botón "Equipo" en la barra de navegación que redirecciona a http://127.0.0.1:8000/equipos/ y permite:
+    * Ver información del elemento al clickearlo y redirecciona a http://127.0.0.1:8000/equipo/<id>
+    * Agregar http://127.0.0.1:8000/equipo/add
+    * Editar  http://127.0.0.1:8000/equipo/update/<id>
+    * Borrar
+
+### Jugadores
+* Listado: Botón "Jugador" en la barra de navegación que redirecciona a http://127.0.0.1:8000/jugadores y permite:
+    * Ver información del elemento al clickearlo y redirecciona a http://127.0.0.1:8000/jugador/<id>
+    * Agregar http://127.0.0.1:8000/jugador/add
+    * Editar  http://127.0.0.1:8000/jugador/update/<id>
+    * Borrar
+
+### Sobre Nosotros
+ Botón "Sobre Nosotros" en la barra de navegación que redirecciona a http://127.0.0.1:8000/about/
+
+### Página de Perfil
+Hacer click sobre el nombre del usuario activo, que redirecciona a http://127.0.0.1:8000/account/profile
+ 
+### Footer
+  * Ayuda: https://stackoverflow.com/
+  * Instagram: https://www.instagram.com/coderhouse/?hl=es
+  * Twitter: https://twitter.com/coderhouse
+  * Facebook: https://www.facebook.com/Coderhouse
+
+
+### Admin
+  Usuario: josemanuel
+  Clave: jose1234
+
+
+
+
+
+----
+# Entrega Intermedia - Grupo Gigi/Robles/Acosta
 
 Entrega Intermedia 
 #### Participantes: 
@@ -23,8 +80,7 @@ Entrega Intermedia
 * Jordy Acosta
 * José Robles 
 
-## Inicio
-Ingresar a la página de inicio con la siguiente url: http://127.0.0.1:8000/clase/
+## Inicio Ingresar a la página de inicio con la siguiente url: http://127.0.0.1:8000/clase/
 
 ### Equipos
 Para probar que corre la página de equipos, seguir el siguiente link  http://127.0.0.1:8000/clase/equipo o hacer click en la barra de navegación
