@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login, authenticate
-from .forms import AvatarFormulario, UserRegisterForm , UsereditForm
+from .forms import AvatarFormulario, UserEditForm, UserRegisterForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth.decorators import login_required
@@ -91,34 +91,35 @@ def buscar(request):
 
 
 def login_request(request):
-    
-    if request.method == "POST":
-        form = AuthenticationForm(request, data= request.POST)
-        
-        if form.is_valid():
-            usuario = form.cleaned_data.get('username')
-            clave = form.cleaned_data.get('password')
+    if not request.user.is_authenticated: 
+        if request.method == "POST":
+            form = AuthenticationForm(request, data= request.POST)
             
-            user = authenticate(username=usuario , password=clave)
-            
-            if user is not None:
-                login(request, user)
+            if form.is_valid():
+                usuario = form.cleaned_data.get('username')
+                clave = form.cleaned_data.get('password')
                 
-                return render(request, 'blog/inicio.html', {'mensaje' : f'Bienvenido {usuario}'})
-            
+                user = authenticate(username=usuario , password=clave)
+                
+                if user is not None:
+                    login(request, user)
+                    
+                    return redirect ('blogs')                                                  #(request, 'blog/inicio.html', {'mensaje' : f'Bienvenido {usuario}'})
+                
+                else:
+                    #request.method = "GET" 
+                    return render(request, 'blog/login.html', {'mensaje' : 'Los datos ingresados no corresponden a ningún usuario','form':form})
+                
             else:
-                #request.method = "GET" 
-                return render(request, 'blog/login.html', {'mensaje' : 'Los datos ingresados no corresponden a ningún usuario'})
-            
-        else:
-            
-            #request.method = "GET"
-            return render(request, 'blog/login.html', {'mensaje' : 'Los datos ingresados no son válidos'})
+                
+                #request.method = "GET"
+                return render(request, 'blog/login.html', {'mensaje' : 'Los datos ingresados no son válidos','form':form })
 
-    form = AuthenticationForm()
-    
-    return render(request, 'blog/login.html' , {'form' : form})
-
+        form = AuthenticationForm()
+        
+        return render(request, 'blog/login.html' , {'form' : form})
+    else: 
+        return render (request,'blog/login.html',{'mensaje' : 'Ya estás logueado'} )
 
 
 def registro (request):
@@ -128,7 +129,7 @@ def registro (request):
         if form.is_valid():
             username = form.cleaned_data ['username']
             form.save()
-            return render (request, "blog/inicio.html", {"mensaje": "Usuario Creado :)"})     
+            return redirect ('blogs')  #(request, "blog/inicio.html", {"mensaje": "Usuario Creado :)"})     
         
     else:
          # form = UserCreationForm()
@@ -136,13 +137,14 @@ def registro (request):
             
     return render (request, 'blog/registro.html', {'form':form})
 
+@login_required
 def editarPerfil(request):
     #Instancia del login
     
     #Si es método POST hago lo mismo que el agregar 
     usuario = request.user
     if request.method == 'POST':
-        miFormulario = UsereditForm (request.POST)
+        miFormulario = UserEditForm (request.POST)
         if miFormulario.is_valid (): #Si pasó la validación de Django
             
             informacion = miFormulario.cleaned_data
@@ -151,16 +153,20 @@ def editarPerfil(request):
             usuario.email = informacion ['email']
             usuario.password1 = informacion ['password1']
             usuario.password2 = informacion ['password1']
+            usuario.last_name = informacion ['last_name']
+            usuario.first_name =  informacion ['first_name']
             usuario.save ()
             
-            return render (request, "blog/inicio.html") #Vuelvo al inicio o a donde quieran
+            return redirect ('blogs') #(request, "blog/inicio.html") #Vuelvo al inicio o a donde quieran
+        else:   
+            return redirect ('editar_perfil')
     #En caso que no sea post
     else:
         #Creo el formulario con los datos que voy a modificar
-        miFormulario = UsereditForm (initial = { 'email': usuario.email})
+        miFormulario = UserEditForm (initial = { 'email': usuario.email,'last_name':usuario.last_name,'first_name':usuario.first_name})
         
         #Voy al html que me permite editar
-        return render (request, "blog/editarperfil.html", {"miFormulario":miFormulario , "usuario":usuario})
+        return render (request, "blog/editar_perfil.html", {"miFormulario":miFormulario , "usuario":usuario})
 
 @login_required
 def agregar_avatar (request):
@@ -170,7 +176,7 @@ def agregar_avatar (request):
         if miFormulario.is_valid():
             avatar = Avatar (user = request.user , imagen = miFormulario.cleaned_data ['imagen'] )    
             avatar.save ()
-            return redirect ('inicio')
+            return redirect ('blogs')
     else:
         miFormulario = AvatarFormulario ()
     
@@ -381,6 +387,25 @@ def blog_delete(request, id_blog):
 
     return redirect('blogs')
 
-class UserView (DetailView):
-    model = User
-    template_name = 'blog/perfil.html'
+# class UserView (DetailView):
+#     model = User
+#     template_name = 'blog/perfil.html'
+#     context_object_name = 'user_object'
+#     def get_context_data(self, **kwargs) :
+#         context = super().get_context_data(**kwargs)     
+    
+#         avatares=Avatar.objects.filter(user = self.request.user.id)
+#         if avatares.__len__():        
+#             context["url"] = avatares[0].imagen.url 
+#         return context
+def user_view (request):
+    if request.user.is_authenticated:
+        avatares=Avatar.objects.filter(user = request.user.id)
+        if avatares.__len__():        
+            url = avatares[0].imagen.url 
+        # else:
+        #     url = ""
+        return render (request,'blog/perfil.html',{'url': url})
+
+def about_view (request):
+    return render (request,"blog/about.html")

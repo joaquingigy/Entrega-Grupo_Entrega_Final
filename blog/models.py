@@ -4,7 +4,7 @@ from django.db import models
 # from AppModels.views import equipo
 
 from django.contrib.auth.models import User
-
+from tinymce.models import HTMLField
 
 # Create your models here.
 # class Autor(models.Model):
@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
 class Blog(models.Model):
     titulo = models.CharField(max_length=50)
     subtitulo= models.CharField(max_length=50)
-    cuerpo = models.TextField()
+    cuerpo = HTMLField()
     autor = models.ForeignKey(
         User ,
         on_delete = models.RESTRICT ,

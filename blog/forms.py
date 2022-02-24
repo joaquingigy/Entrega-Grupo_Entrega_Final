@@ -1,11 +1,13 @@
 from calendar import c
+from attr import attrs
 from django.contrib.auth.forms import UserCreationForm
 import django.forms as forms
 from django.contrib.auth.models import User
 from django.forms import Form, CharField, ImageField, IntegerField ,DateTimeField,ModelChoiceField
 
 from blog.models import Avatar, Blog, Jugador,Equipo
-
+# from django.contrib.flatpages.models import FlatPage
+from tinymce.widgets import TinyMCE
 
 
 class UserRegisterForm (UserCreationForm):
@@ -24,12 +26,12 @@ class UserRegisterForm (UserCreationForm):
         fields = ['username','email', 'password1', 'password2','last_name','first_name']   
         help_texts = {k:"" for k in fields}
 
-class UsereditForm (UserCreationForm):
+class UserEditForm (UserCreationForm):
     #Acá se definen las opciones que queres modificar del usuario,
     #Ponemos las básicas
     email = forms.EmailField (label= "Modificar E-Mail")
     password1 = forms.CharField (label= 'Contraseña', widget = forms.PasswordInput)
-    password1 = forms.CharField (label = 'Repetir la contraseña', widget = forms.PasswordInput)
+    password2 = forms.CharField (label = 'Repetir la contraseña', widget = forms.PasswordInput)
     
     last_name = forms.CharField()
     first_name = forms.CharField()
@@ -84,7 +86,7 @@ class DirectorTecnicoForm(Form):
 class BlogForm(Form):
     titulo= CharField(max_length=50)
     subtitulo= CharField(max_length=50)
-    cuerpo = CharField ()
+    cuerpo = CharField(widget=TinyMCE (attrs = {'cols' : 80 ,'rows' : 30 }))
     autor = ModelChoiceField (queryset = User.objects.all())
     imagen = CharField ()
     class Meta:
@@ -92,7 +94,8 @@ class BlogForm(Form):
         fields = [ 'titulo','subtitulo', 'cuerpo', 'autor','imagen'] 
         #Saca los mensajes de ayuda
         help_texts = {k: "" for k in fields}
-        
+        #model = FlatPage
+    
 class AvatarFormulario (Form):
     imagen = ImageField (required = True)
     class Meta:

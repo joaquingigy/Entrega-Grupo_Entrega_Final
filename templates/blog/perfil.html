@@ -1,11 +1,17 @@
 {% extends "blog/padre.html" %} 
 {% load static %} 
 {% block contenidoQueCambia %}
+  
+<link rel="stylesheet" href="{% static 'AppModels/css/usuario.css' %}">
 
-<img src={{url}}>
-<h3>{{ user.username }}</h3>
-<h5 class ='text-muted'>{{ user.first_name  }} {{user.last_name}} </h5>
-<p> email: {{ user.email}}</p>
+    {%if user.is_authenticated%}
+    <img width="400" src={{url}} class = "avatar-perfil" >
+    <h3>{{ user.username }}</h3>
+    <h5 class ='text-muted'>{{ user.first_name }} {{user.last_name}} </h5>
+    <p> email: {{ user.email}}</p>
 
+    {% endif %}
 
 {% endblock %}
+
+

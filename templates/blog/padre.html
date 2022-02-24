@@ -28,7 +28,7 @@
                 <a class="navbar-brand" href="{% url 'directores_tecnicos' %}">Director Tecnico</a>
                 <a class="navbar-brand" href="{% url 'equipos' %}">Equipo</a>
                 <a class="navbar-brand" href="{% url 'jugadores' %}">Jugador</a>
-                
+                <a class="navbar-brand" href="{% url 'about' %}">Sobre nosotros</a>
                 <div style = "display:contents;position:relative" > 
 
                     {% if not request.user.is_authenticated %} 
@@ -40,11 +40,11 @@
                     <!-- <p class="text-muted small mb-4 mb-lg-0 "> Hola, {{user.username}}!!! </p> -->
                     
                     <menu id="usuario" class="text-muted small mb-4 mb-lg-0">
-                        <li>Hola, {{user.username}}!!!
-                            {% comment %} <a href="{% url 'perfil' request.user.id %}"> {{user.username}}!!! </a> {% endcomment %}
+                        <li>Hola, 
+                             <a href="{% url 'perfil' %}">{{user.username}}</a>!!! 
                            
                             <ul>
-                                <li><a href="">Editar perfil</a></li>
+                                <li><a href="{% url 'editar_perfil' %}">Editar perfil</a></li>
                                 <li><a href="{% url 'logout' %}">Salir</a></li>
                             </ul>
                         </li>
@@ -73,9 +73,9 @@
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">Ayuda</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Contacto</a></li>
+                            <li class="list-inline-item"><a target="_blank" href="https://stackoverflow.com/">Ayuda</a></li>
+                            {% comment %} <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="#!">Acerca de mi </a></li> {% endcomment %}
                       
                         </ul>
                         <p class="text-muted small mb-4 mb-lg-0">&copy; La pelota no se mancha.</p>

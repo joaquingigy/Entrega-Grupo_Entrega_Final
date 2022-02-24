@@ -1,7 +1,8 @@
 {% extends "blog/padre.html" %} 
 {% load static %} 
 {% block contenidoQueCambia %}
-
+ <div> {{mensaje}} </div>
+    {%if not request.user.is_authenticated%}
     <form id="login" action="" method="POST">
 
         {% csrf_token %}
@@ -12,4 +13,5 @@
 
     </form>
         <a href="{% url 'registro' %}"> Registrarse </a>
+        {% endif %}
 {% endblock %}
