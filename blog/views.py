@@ -123,19 +123,22 @@ def login_request(request):
 
 
 def registro (request):
-    if request.method == 'POST' :
-        # form = UserCreationForm(request.POST)
-        form = UserRegisterForm(request.POST)    
-        if form.is_valid():
-            username = form.cleaned_data ['username']
-            form.save()
-            return redirect ('login')  #(request, "blog/inicio.html", {"mensaje": "Usuario Creado :)"})     
-        
-    else:
-         # form = UserCreationForm()
-        form = UserRegisterForm()
+    if not request.user.is_authenticated:
+        if request.method == 'POST' :
+            # form = UserCreationForm(request.POST)
+            form = UserRegisterForm(request.POST)    
+            if form.is_valid():
+                username = form.cleaned_data ['username']
+                form.save()
+                return redirect ('login')  #(request, "blog/inicio.html", {"mensaje": "Usuario Creado :)"})     
             
-    return render (request, 'blog/registro.html', {'form':form})
+        else:
+            # form = UserCreationForm()
+            form = UserRegisterForm()
+                
+        return render (request, 'blog/registro.html', {'form':form})
+    else:
+        return render (request,'blog/login.html',{'mensaje' : 'Ya estás logueado'} )
 
 @login_required
 def editarPerfil(request):
